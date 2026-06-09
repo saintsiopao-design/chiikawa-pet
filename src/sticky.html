@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:transparent;width:100%;height:100vh;display:flex;flex-direction:column;overflow:hidden;}
+#sticky{
+  width:100%;height:100%;
+  border-radius:16px;
+  display:flex;flex-direction:column;
+  overflow:hidden;
+  box-shadow:0 8px 24px rgba(0,0,0,0.25),0 2px 6px rgba(0,0,0,0.15);
+  position:relative;
+}
+#sticky::before{
+  content:'';position:absolute;inset:0;border-radius:16px;
+  background-image:radial-gradient(circle,rgba(0,0,0,0.05) 1px,transparent 1px);
+  background-size:14px 14px;pointer-events:none;z-index:0;
+}
+#toolbar{
+  display:flex;align-items:center;gap:4px;
+  padding:7px 10px 5px;
+  -webkit-app-region:drag;
+  cursor:move;flex-shrink:0;
+  position:relative;z-index:1;
+  border-bottom:1.5px solid rgba(0,0,0,0.1);
+}
+.tb-title{
+  flex:1;font-size:11px;font-weight:800;
+  color:rgba(0,0,0,0.55);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  -webkit-app-region:drag;
+}
+.tb-btn{
+  -webkit-app-region:no-drag;
+  background:rgba(0,0,0,0.08);border:none;cursor:pointer;
+  width:22px;height:22px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;transition:all 0.15s;color:rgba(0,0,0,0.45);
+  flex-shrink:0;
+}
+.tb-btn:hover{background:rgba(0,0,0,0.16);color:rgba(0,0,0,0.75);}
+
+#color-bar{
+  display:none;flex-direction:column;gap:8px;
+  padding:10px 12px;
+  border-bottom:1.5px solid rgba(0,0,0,0.08);
+  position:relative;z-index:1;
+  -webkit-app-region:no-drag;
+}
+#color-bar.open{display:flex;}
+
+.cb-label{font-size:10px;font-weight:800;color:rgba(0,0,0,0.4);text-transform:uppercase;letter-spacing:0.05em;}
+
+.color-row{display:flex;gap:5px;flex-wrap:wrap;}
+.color-swatch{
+  width:22px;height:22px;border-radius:50%;cursor:pointer;
+  border:2.5px solid transparent;transition:all 0.15s;flex-shrink:0;
+  box-shadow:0 1px 3px rgba(0,0,0,0.15);
+}
+.color-swatch:hover{transform:scale(1.2);}
+.color-swatch.active{border-color:rgba(0,0,0,0.4);transform:scale(1.15);}
+
+.ctrl-row{display:flex;align-items:center;gap:8px;}
+.ctrl-row label{font-size:10px;font-weight:700;color:rgba(0,0,0,0.45);min-width:52px;}
+#custom-color{width:30px;height:24px;padding:1px;border:1.5px solid rgba(0,0,0,0.15);border-radius:6px;cursor:pointer;background:none;}
+
+.opacity-slider{
+  flex:1;-webkit-appearance:none;height:4px;border-radius:4px;
+  background:linear-gradient(to right,rgba(0,0,0,0.1),rgba(0,0,0,0.8));
+  outline:none;cursor:pointer;
+}
+.opacity-slider::-webkit-slider-thumb{
+  -webkit-appearance:none;width:14px;height:14px;
+  border-radius:50%;background:white;
+  border:2px solid rgba(0,0,0,0.3);cursor:pointer;
+  box-shadow:0 1px 3px rgba(0,0,0,0.2);
+}
+#opacity-val{font-size:10px;font-weight:800;color:rgba(0,0,0,0.45);min-width:28px;text-align:right;}
+
+.size-row{display:flex;gap:4px;align-items:center;}
+.size-row label{font-size:10px;font-weight:700;color:rgba(0,0,0,0.45);min-width:52px;}
+.size-btn{
+  padding:2px 10px;border-radius:6px;
+  border:1.5px solid rgba(0,0,0,0.15);
+  background:rgba(255,255,255,0.5);
+  font-size:10px;font-weight:800;cursor:pointer;
+  font-family:'Nunito',sans-serif;color:rgba(0,0,0,0.5);transition:all 0.15s;
+}
+.size-btn:hover{background:rgba(0,0,0,0.08);}
+.size-btn.active-size{background:rgba(0,0,0,0.15);color:rgba(0,0,0,0.75);}
+
+#deco{position:absolute;top:4px;right:8px;font-size:22px;opacity:0.15;pointer-events:none;z-index:0;line-height:1;}
+
+#content{
+  flex:1;padding:8px 12px;
+  font-size:13px;font-weight:600;line-height:1.7;
+  border:none;outline:none;resize:none;
+  background:transparent;
+  font-family:'Nunito',sans-serif;
+  color:rgba(0,0,0,0.75);
+  position:relative;z-index:1;
+}
+#content::placeholder{color:rgba(0,0,0,0.25);font-style:italic;}
+
+#footer{
+  padding:2px 12px 6px;
+  font-size:9px;font-weight:800;
+  color:rgba(0,0,0,0.2);
+  text-align:right;
+  position:relative;z-index:1;
+  -webkit-app-region:drag;
+  flex-shrink:0;
+}
+</style>
+</head>
+<body>
+<div id="sticky">
+  <div id="deco">🌸</div>
+  <div id="toolbar">
+    <span class="tb-title" id="tlbl">Note</span>
+    <button class="tb-btn" onclick="toggleColorBar()" title="Customize">🎨</button>
+    <button class="tb-btn" onclick="closeMe()" title="Close">×</button>
+  </div>
+
+  <div id="color-bar">
+    <div>
+      <div class="cb-label" style="margin-bottom:5px;">Color</div>
+      <div class="color-row" id="swatch-row"></div>
+    </div>
+    <div class="ctrl-row">
+      <label>Custom</label>
+      <input type="color" id="custom-color" value="#fffde7" oninput="applyColor(this.value)"/>
+    </div>
+    <div class="ctrl-row">
+      <label>Opacity</label>
+      <input type="range" class="opacity-slider" id="opacity-slider" min="30" max="100" value="100" oninput="applyOpacity(this.value)"/>
+      <span id="opacity-val">100%</span>
+    </div>
+    <div class="size-row">
+      <label>Size</label>
+      <button class="size-btn" onclick="setSize(180,160,'S')">S</button>
+      <button class="size-btn active-size" onclick="setSize(240,200,'M')">M</button>
+      <button class="size-btn" onclick="setSize(300,260,'L')">L</button>
+      <button class="size-btn" onclick="setSize(360,320,'XL')">XL</button>
+    </div>
+  </div>
+
+  <textarea id="content" placeholder="Write something cute here~ ✨"></textarea>
+  <div id="footer">chiikawa ♡</div>
+</div>
+
+<script>
+const {ipcRenderer} = require('electron');
+let nid = null, curColor = '#fffde7', curOpacity = 1;
+
+const palette = [
+  '#fffde7','#fff9c4','#fff3e0','#fce4ec','#f8bbd0',
+  '#e8f5e9','#dcedc8','#e3f2fd','#bbdefb','#e8eaf6',
+  '#f3e5f5','#ede7f6','#fbe9e7','#efebe9','#ffffff',
+];
+const decos = ['🌸','✨','🍄','🌿','🍙','💜','🌷','⭐','🎀','🍓'];
+
+function init() {
+  const row = document.getElementById('swatch-row');
+  palette.forEach(c => {
+    const sw = document.createElement('div');
+    sw.className = 'color-swatch' + (c === curColor ? ' active' : '');
+    sw.style.background = c;
+    sw.title = c;
+    sw.onclick = () => applyColor(c);
+    row.appendChild(sw);
+  });
+}
+
+ipcRenderer.on('sticky-data', (_, note) => {
+  nid = note.id;
+  document.getElementById('tlbl').textContent = note.title || 'Note';
+  document.getElementById('content').value = note.content || '';
+  curColor = note.color || '#fffde7';
+  curOpacity = note.opacity !== undefined ? note.opacity : 1;
+  document.getElementById('opacity-slider').value = Math.round(curOpacity * 100);
+  document.getElementById('opacity-val').textContent = Math.round(curOpacity * 100) + '%';
+  document.getElementById('custom-color').value = curColor;
+  applyColorAndOpacity(curColor, curOpacity, false);
+  document.getElementById('deco').textContent = decos[note.id % decos.length];
+});
+
+function applyColor(color, save = true) {
+  curColor = color;
+  document.getElementById('custom-color').value = color;
+  applyColorAndOpacity(color, curOpacity, save);
+  document.querySelectorAll('.color-swatch').forEach(sw => {
+    sw.classList.toggle('active', sw.title === color);
+  });
+}
+
+function applyOpacity(val) {
+  curOpacity = val / 100;
+  document.getElementById('opacity-val').textContent = val + '%';
+  applyColorAndOpacity(curColor, curOpacity, true);
+}
+
+function applyColorAndOpacity(color, opacity, save = true) {
+  // Parse hex to rgb
+  const rgb = hexToRgb(color);
+  const bg = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${opacity})`;
+  const toolbarBg = `rgba(${Math.max(0,rgb.r-10)}, ${Math.max(0,rgb.g-10)}, ${Math.max(0,rgb.b-10)}, ${Math.min(1, opacity + 0.05)})`;
+
+  document.getElementById('sticky').style.background = bg;
+  document.getElementById('toolbar').style.background = toolbarBg;
+  document.getElementById('color-bar').style.background = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${Math.min(1, opacity + 0.1)})`;
+
+  if (save && nid) {
+    ipcRenderer.send('update-sticky', { id: nid, color, opacity: curOpacity });
+  }
+}
+
+function toggleColorBar() {
+  document.getElementById('color-bar').classList.toggle('open');
+}
+
+function setSize(w, h, label) {
+  document.querySelectorAll('.size-btn').forEach(b => b.classList.toggle('active-size', b.textContent === label));
+  ipcRenderer.send('resize-sticky', { id: nid, w, h });
+}
+
+document.getElementById('content').addEventListener('input', function() {
+  if (nid) ipcRenderer.send('update-sticky', { id: nid, content: this.value });
+});
+
+function closeMe() { ipcRenderer.send('close-sticky', nid); }
+
+function hexToRgb(hex) {
+  hex = hex.replace('#', '');
+  if (hex.length === 3) hex = hex.split('').map(c => c + c).join('');
+  return {
+    r: parseInt(hex.slice(0, 2), 16),
+    g: parseInt(hex.slice(2, 4), 16),
+    b: parseInt(hex.slice(4, 6), 16)
+  };
+}
+
+init();
+</script>
+</body>
+</html>

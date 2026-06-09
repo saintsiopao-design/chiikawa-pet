@@ -1,0 +1,57 @@
+{
+  "name": "chiikawa-desktop-pet",
+  "version": "1.0.0",
+  "description": "Chiikawa Desktop Pet with productivity tools",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64",
+    "dist": "electron-builder --win portable",
+    "publish": "electron-builder --win --x64 --publish always"
+  },
+  "build": {
+    "appId": "com.chiikawa.desktoppet",
+    "productName": "Chiikawa Pet",
+    "icon": "assets/chiikawa.png",
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/chiikawa.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "deleteAppDataOnUninstall": false
+    },
+    "files": [
+      "**/*",
+      "!node_modules/.cache/**"
+    ],
+    "publish": {
+      "provider": "github",
+      "owner": "saintsiopao-design",
+      "repo": "chiikawa-pet"
+    }
+  },
+  "dependencies": {
+    "electron-store": "^8.1.0",
+    "electron-updater": "^6.1.7"
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.13.0"
+  }
+}
