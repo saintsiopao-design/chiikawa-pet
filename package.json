@@ -1,6 +1,6 @@
 {
   "name": "chiikawa-desktop-pet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Chiikawa Desktop Pet with productivity tools",
   "main": "main.js",
   "scripts": {
@@ -38,13 +38,25 @@
     },
     "files": [
       "**/*",
-      "!node_modules/.cache/**"
+      "!node_modules/.cache/**",
+      "node_modules/discord-rpc/**"
     ],
     "publish": {
       "provider": "github",
       "owner": "saintsiopao-design",
       "repo": "chiikawa-pet"
-    }
+    },
+    "extraMetadata": {
+      "dependencies": {
+        "electron-store": "^8.1.0",
+        "electron-updater": "^6.1.7",
+        "discord-rpc": "^4.0.1"
+      }
+    },
+    "asarUnpack": [
+      "node_modules/discord-rpc/**",
+      "node_modules/@discordjs/**"
+    ]
   },
   "dependencies": {
     "electron-store": "^8.1.0",
