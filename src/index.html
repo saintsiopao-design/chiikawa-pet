@@ -141,7 +141,11 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
 <div id="app">
   <div id="titlebar">
     <span class="app-title">🌸 Chiikawa Pet</span>
-    <div class="win-btns"><button class="win-btn btn-min" onclick="minimize()"></button><button class="win-btn btn-hide" onclick="hideApp()"></button><button class="win-btn btn-close" onclick="closeApp()"></button></div>
+    <div class="win-btns">
+  <button class="win-btn" onclick="minimize()" title="Minimize" style="background:none;border:none;padding:0;cursor:pointer;width:20px;height:20px;"><img src="../assets/minimize.png" style="width:20px;height:20px;object-fit:contain;display:block;"/></button>
+  <button class="win-btn" onclick="hideApp()" title="Hide to tray" style="background:none;border:none;padding:0;cursor:pointer;width:20px;height:20px;"><img src="../assets/hide.png" style="width:20px;height:20px;object-fit:contain;display:block;"/></button>
+  <button class="win-btn" onclick="closeApp()" title="Close" style="background:none;border:none;padding:0;cursor:pointer;width:20px;height:20px;"><img src="../assets/close.png" style="width:20px;height:20px;object-fit:contain;display:block;"/></button>
+</div>
   </div>
   <div id="update-bar" id="update-bar">
     <span id="update-text">✨ Update available!</span>
