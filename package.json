@@ -1,6 +1,6 @@
 {
   "name": "chiikawa-desktop-pet",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Chiikawa Desktop Pet with productivity tools",
   "main": "main.js",
   "scripts": {
