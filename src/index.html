@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <title>Chiikawa Pet</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--accent:#b088d0;--accent2:#e8a0c0;--lp:#e0c8f0;--soft:#fdf6ff;--text:#5a3a7a;--muted:#9a70be;--bg:#fdf6ff;--card:#ffffff;--border:#e0c8f0;--sidebar:#f5eeff;--danger:#e07070;--font-size:13px;}
@@ -26,6 +27,9 @@ body{font-family:'Nunito',sans-serif;font-size:var(--font-size);background:trans
 .nav-item{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.15s;position:relative;border:none;background:none;}
 .nav-item:hover{background:rgba(176,136,208,0.15);}
 .nav-item.active{background:var(--accent);box-shadow:0 2px 8px rgba(176,136,208,0.4);}
+.nav-item i{font-size:18px;color:var(--muted);transition:color 0.15s;pointer-events:none;}
+.nav-item:hover i{color:var(--accent);}
+.nav-item.active i{color:white;}
 .nav-item .tt{position:fixed;left:60px;background:#333;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:9999;}
 .nav-item:hover .tt{opacity:1;}
 .nav-div{width:32px;height:1px;background:var(--border);margin:4px 0;flex-shrink:0;}
@@ -155,23 +159,23 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
   </div>
   <div id="main-layout">
     <div id="sidebar">
-      <button class="nav-item active" data-panel="home" onclick="nav('home',this)">🏠<span class="tt">Home</span></button>
-      <button class="nav-item" data-panel="pet" onclick="nav('pet',this)">🐾<span class="tt">Pet</span></button>
+      <button class="nav-item active" data-panel="home" onclick="nav('home',this)"><i class="ti ti-home" aria-hidden="true"></i><span class="tt">Home</span></button>
+      <button class="nav-item" data-panel="pet" onclick="nav('pet',this)"><i class="ti ti-paw" aria-hidden="true"></i><span class="tt">Pet</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="timer" onclick="nav('timer',this)">🍅<span class="tt">Timer</span></button>
-      <button class="nav-item" data-panel="tasks" onclick="nav('tasks',this)">✅<span class="tt">Tasks</span></button>
-      <button class="nav-item" data-panel="productivity" onclick="nav('productivity',this)">📋<span class="tt">Productivity</span></button>
-      <button class="nav-item" data-panel="notebook" onclick="nav('notebook',this)">📓<span class="tt">Notebook</span></button>
+      <button class="nav-item" data-panel="timer" onclick="nav('timer',this)"><i class="ti ti-clock" aria-hidden="true"></i><span class="tt">Timer</span></button>
+      <button class="nav-item" data-panel="tasks" onclick="nav('tasks',this)"><i class="ti ti-checkbox" aria-hidden="true"></i><span class="tt">Tasks</span></button>
+      <button class="nav-item" data-panel="productivity" onclick="nav('productivity',this)"><i class="ti ti-chart-bar" aria-hidden="true"></i><span class="tt">Productivity</span></button>
+      <button class="nav-item" data-panel="notebook" onclick="nav('notebook',this)"><i class="ti ti-notebook" aria-hidden="true"></i><span class="tt">Notebook</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="reminders" onclick="nav('reminders',this)">🔔<span class="tt">Reminders</span></button>
-      <button class="nav-item" data-panel="calendar" onclick="nav('calendar',this)">📅<span class="tt">Calendar</span></button>
+      <button class="nav-item" data-panel="reminders" onclick="nav('reminders',this)"><i class="ti ti-bell" aria-hidden="true"></i><span class="tt">Reminders</span></button>
+      <button class="nav-item" data-panel="calendar" onclick="nav('calendar',this)"><i class="ti ti-calendar" aria-hidden="true"></i><span class="tt">Calendar</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="utility" onclick="nav('utility',this)">🔧<span class="tt">Utility</span></button>
-      <button class="nav-item" data-panel="music" onclick="nav('music',this)">🎵<span class="tt">Music</span></button>
-      <button class="nav-item" data-panel="stickies" onclick="nav('stickies',this)">🗒️<span class="tt">Sticky Notes</span></button>
+      <button class="nav-item" data-panel="utility" onclick="nav('utility',this)"><i class="ti ti-tool" aria-hidden="true"></i><span class="tt">Utility</span></button>
+      <button class="nav-item" data-panel="music" onclick="nav('music',this)"><i class="ti ti-music" aria-hidden="true"></i><span class="tt">Music</span></button>
+      <button class="nav-item" data-panel="stickies" onclick="nav('stickies',this)"><i class="ti ti-note" aria-hidden="true"></i><span class="tt">Sticky Notes</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="appearance" onclick="nav('appearance',this)">🎨<span class="tt">Appearance</span></button>
-      <button class="nav-item" data-panel="tags" onclick="nav('tags',this)">🏷️<span class="tt">Tags</span></button>
+      <button class="nav-item" data-panel="appearance" onclick="nav('appearance',this)"><i class="ti ti-palette" aria-hidden="true"></i><span class="tt">Appearance</span></button>
+      <button class="nav-item" data-panel="tags" onclick="nav('tags',this)"><i class="ti ti-tag" aria-hidden="true"></i><span class="tt">Tags</span></button>
     </div>
     <div id="content-area">
       <!-- PERSISTENT PET BAR -->
