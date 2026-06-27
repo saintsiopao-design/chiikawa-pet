@@ -4,7 +4,6 @@
 <meta charset="UTF-8"/>
 <title>Chiikawa Pet</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
-<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.24.0/dist/tabler-icons.min.css" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 :root{--accent:#b088d0;--accent2:#e8a0c0;--lp:#e0c8f0;--soft:#fdf6ff;--text:#5a3a7a;--muted:#9a70be;--bg:#fdf6ff;--card:#ffffff;--border:#e0c8f0;--sidebar:#f5eeff;--danger:#e07070;--font-size:13px;}
@@ -15,7 +14,7 @@ body{font-family:'Nunito',sans-serif;font-size:var(--font-size);background:trans
 .win-btns{display:flex;gap:6px;-webkit-app-region:no-drag;}
 .win-btn{width:12px;height:12px;border-radius:50%;border:none;cursor:pointer;}
 .btn-min{background:#f0c060;}.btn-hide{background:#7ec8b0;}.btn-close{background:#e07070;}
-#main-layout{display:flex;flex:1;overflow:visible;}
+#main-layout{display:flex;flex:1;overflow:hidden;}
 #sidebar{width:52px;background:var(--sidebar);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;padding:8px 0;gap:2px;overflow-y:auto;overflow-x:visible;flex-shrink:0;}
 #sidebar::-webkit-scrollbar{display:none;}
 #update-bar{display:none;align-items:center;gap:8px;padding:6px 12px;background:linear-gradient(90deg,#b088d0,#e8a0c0);color:white;font-size:11px;font-weight:700;flex-shrink:0;animation:bpop 0.3s ease;}
@@ -27,9 +26,6 @@ body{font-family:'Nunito',sans-serif;font-size:var(--font-size);background:trans
 .nav-item{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.15s;position:relative;border:none;background:none;}
 .nav-item:hover{background:rgba(176,136,208,0.15);}
 .nav-item.active{background:var(--accent);box-shadow:0 2px 8px rgba(176,136,208,0.4);}
-.nav-item i{font-size:18px;color:var(--muted);transition:color 0.15s;pointer-events:none;}
-.nav-item:hover i{color:var(--accent);}
-.nav-item.active i{color:white;}
 .nav-item .tt{position:fixed;left:60px;background:#333;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:9999;}
 .nav-item:hover .tt{opacity:1;}
 .nav-div{width:32px;height:1px;background:var(--border);margin:4px 0;flex-shrink:0;}
@@ -115,6 +111,15 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
 .nb-item{display:flex;align-items:center;gap:8px;background:var(--soft);border:1.5px solid var(--border);border-radius:10px;padding:7px 10px;cursor:pointer;transition:all 0.15s;margin-bottom:5px;}
 .nb-item:hover{background:var(--lp);}
 .link-item{display:flex;align-items:center;gap:8px;background:var(--soft);border:1.5px solid var(--border);border-radius:10px;padding:7px 10px;margin-bottom:5px;}
+.link-folder{border-radius:10px;border:1.5px solid var(--border);margin-bottom:6px;overflow:hidden;}
+.link-folder-hd{display:flex;align-items:center;gap:6px;padding:8px 10px;cursor:pointer;background:var(--card);font-size:12px;font-weight:700;color:var(--text);user-select:none;}
+.link-folder-hd:hover{background:var(--soft);}
+.link-folder-hd i{font-size:15px;color:var(--accent);flex-shrink:0;}
+.link-folder-hd .lf-name{flex:1;}
+.lf-count{font-size:10px;color:var(--muted);font-weight:700;background:var(--lp);padding:1px 7px;border-radius:10px;flex-shrink:0;}
+.link-folder-bd{padding:6px;display:flex;flex-direction:column;gap:0;background:var(--bg);}
+.link-folder-bd .link-item{margin-bottom:4px;}
+.link-folder-bd .link-item:last-child{margin-bottom:0;}
 .clip-item{display:flex;align-items:center;gap:8px;background:var(--soft);border:1.5px solid var(--border);border-radius:10px;padding:7px 10px;margin-bottom:5px;cursor:pointer;transition:all 0.15s;}
 .clip-item:hover{background:var(--lp);}
 .clip-text{flex:1;font-size:11px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
@@ -159,23 +164,23 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
   </div>
   <div id="main-layout">
     <div id="sidebar">
-      <button class="nav-item active" data-panel="home" onclick="nav('home',this)"><i class="ti ti-home" aria-hidden="true"></i><span class="tt">Home</span></button>
-      <button class="nav-item" data-panel="pet" onclick="nav('pet',this)"><i class="ti ti-paw" aria-hidden="true"></i><span class="tt">Pet</span></button>
+      <button class="nav-item active" data-panel="home" onclick="nav('home',this)">🏠<span class="tt">Home</span></button>
+      <button class="nav-item" data-panel="pet" onclick="nav('pet',this)">🐾<span class="tt">Pet</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="timer" onclick="nav('timer',this)"><i class="ti ti-clock" aria-hidden="true"></i><span class="tt">Timer</span></button>
-      <button class="nav-item" data-panel="tasks" onclick="nav('tasks',this)"><i class="ti ti-checkbox" aria-hidden="true"></i><span class="tt">Tasks</span></button>
-      <button class="nav-item" data-panel="productivity" onclick="nav('productivity',this)"><i class="ti ti-chart-bar" aria-hidden="true"></i><span class="tt">Productivity</span></button>
-      <button class="nav-item" data-panel="notebook" onclick="nav('notebook',this)"><i class="ti ti-notebook" aria-hidden="true"></i><span class="tt">Notebook</span></button>
+      <button class="nav-item" data-panel="timer" onclick="nav('timer',this)">🍅<span class="tt">Timer</span></button>
+      <button class="nav-item" data-panel="tasks" onclick="nav('tasks',this)">✅<span class="tt">Tasks</span></button>
+      <button class="nav-item" data-panel="productivity" onclick="nav('productivity',this)">📋<span class="tt">Productivity</span></button>
+      <button class="nav-item" data-panel="notebook" onclick="nav('notebook',this)">📓<span class="tt">Notebook</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="reminders" onclick="nav('reminders',this)"><i class="ti ti-bell" aria-hidden="true"></i><span class="tt">Reminders</span></button>
-      <button class="nav-item" data-panel="calendar" onclick="nav('calendar',this)"><i class="ti ti-calendar" aria-hidden="true"></i><span class="tt">Calendar</span></button>
+      <button class="nav-item" data-panel="reminders" onclick="nav('reminders',this)">🔔<span class="tt">Reminders</span></button>
+      <button class="nav-item" data-panel="calendar" onclick="nav('calendar',this)">📅<span class="tt">Calendar</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="utility" onclick="nav('utility',this)"><i class="ti ti-tool" aria-hidden="true"></i><span class="tt">Utility</span></button>
-      <button class="nav-item" data-panel="music" onclick="nav('music',this)"><i class="ti ti-music" aria-hidden="true"></i><span class="tt">Music</span></button>
-      <button class="nav-item" data-panel="stickies" onclick="nav('stickies',this)"><i class="ti ti-note" aria-hidden="true"></i><span class="tt">Sticky Notes</span></button>
+      <button class="nav-item" data-panel="utility" onclick="nav('utility',this)">🔧<span class="tt">Utility</span></button>
+      <button class="nav-item" data-panel="music" onclick="nav('music',this)">🎵<span class="tt">Music</span></button>
+      <button class="nav-item" data-panel="stickies" onclick="nav('stickies',this)">🗒️<span class="tt">Sticky Notes</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="appearance" onclick="nav('appearance',this)"><i class="ti ti-palette" aria-hidden="true"></i><span class="tt">Appearance</span></button>
-      <button class="nav-item" data-panel="tags" onclick="nav('tags',this)"><i class="ti ti-tag" aria-hidden="true"></i><span class="tt">Tags</span></button>
+      <button class="nav-item" data-panel="appearance" onclick="nav('appearance',this)">🎨<span class="tt">Appearance</span></button>
+      <button class="nav-item" data-panel="tags" onclick="nav('tags',this)">🏷️<span class="tt">Tags</span></button>
     </div>
     <div id="content-area">
       <!-- PERSISTENT PET BAR -->
@@ -190,7 +195,7 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
             <button class="mood-btn" onclick="setMood(this,'hype')">⚡</button>
           </div>
         </div>
-        <div id="skinBar" style="display:grid;grid-template-columns:repeat(auto-fill,30px);gap:4px;width:clamp(34px,20vw,200px);"></div>
+        <div id="skinBar" style="display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;max-width:120px;"></div>
       </div>
 
       <!-- HOME -->
@@ -360,14 +365,34 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
         </div>
         <div id="util-links">
           <div class="card" style="margin-bottom:8px;">
+            <div class="row" style="margin-bottom:6px;">
+              <input type="text" id="folder-name-input" placeholder="New folder name..." maxlength="30" style="flex:1;" onkeydown="if(event.key==='Enter')addFolder()"/>
+              <button class="btn bp sm" onclick="addFolder()"><i class="ti ti-folder-plus"></i></button>
+            </div>
             <input type="text" id="link-name-input" placeholder="Link name..." maxlength="40" style="margin-bottom:6px;"/>
-            <div class="row"><input type="url" id="link-url-input" placeholder="https://..." maxlength="200" onkeydown="if(event.key==='Enter')addLink()" style="flex:1;"/><button class="btn bp sm" onclick="addLink()">+</button></div>
+            <div class="row" style="margin-bottom:6px;">
+              <input type="url" id="link-url-input" placeholder="https://..." maxlength="200" onkeydown="if(event.key==='Enter')addLink()" style="flex:1;"/>
+              <button class="btn bp sm" onclick="addLink()">+</button>
+            </div>
+            <select id="link-folder-sel" style="width:100%;"><option value="">No folder</option></select>
           </div>
           <div id="link-list"><div class="es">no links yet~ 🔗</div></div>
         </div>
         <div id="util-clip" style="display:none;">
-          <div class="row" style="margin-bottom:8px;">
-            <span style="flex:1;font-size:10px;font-weight:700;color:var(--muted);">Click item to copy again</span>
+          <div class="card" style="margin-bottom:8px;">
+            <div class="row" style="margin-bottom:6px;">
+              <input type="text" id="clip-folder-name-input" placeholder="New folder name..." maxlength="30" style="flex:1;" onkeydown="if(event.key==='Enter')addClipFolder()"/>
+              <button class="btn bp sm" onclick="addClipFolder()"><i class="ti ti-folder-plus"></i></button>
+            </div>
+            <textarea id="clip-text-input" placeholder="Paste or type text to save to a folder..." rows="2" style="resize:none;width:100%;margin-bottom:6px;border:1.5px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:var(--font-size);font-weight:600;color:var(--text);background:var(--card);outline:none;"></textarea>
+            <div class="row">
+              <select id="clip-folder-sel" style="flex:1;"><option value="">Select folder...</option></select>
+              <button class="btn bp sm" onclick="addClipItem()">Save</button>
+            </div>
+          </div>
+          <div id="clip-folder-list"></div>
+          <div class="row" style="margin-bottom:6px;margin-top:4px;">
+            <span style="flex:1;font-size:10px;font-weight:700;color:var(--muted);">History — click to copy</span>
             <button class="btn bs sm" onclick="captureClip()">📋 Capture</button>
             <button class="btn bd sm" onclick="clearClip()">Clear</button>
           </div>
@@ -712,22 +737,39 @@ function saveNbs(){ipcRenderer.invoke('store-set','notebooks',notebooks);}
 function renderNbList(){const l=document.getElementById('notebook-list');let f=nbFilt?notebooks.filter(n=>n.catId===nbFilt):notebooks;if(!f.length){l.innerHTML='<div class="es">no notebooks yet~ 📓</div>';return;}l.innerHTML=f.map(nb=>`<div class="nb-item" onclick="openNbEditor(${nb.id})"><span style="font-size:16px;">📓</span><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:700;">${esc(nb.title)}</div><div style="font-size:10px;color:var(--muted);font-weight:600;">${nb.pages.length} page${nb.pages.length!==1?'s':''}${nb.catId?' · '+cpill(nb.catId):''}</div></div><button class="ib del" onclick="event.stopPropagation();deleteNb(${nb.id})">×</button></div>`).join('');}
 
 // QUICK LINKS
-let qlinks=[];
-async function loadLinks(){qlinks=await ipcRenderer.invoke('store-get','quickLinks')||[];renderLinks();}
-function addLink(){const name=document.getElementById('link-name-input').value.trim(),url=document.getElementById('link-url-input').value.trim();if(!name||!url)return;const fu=url.startsWith('http')?url:'https://'+url;qlinks.push({id:Date.now(),name,url:fu});document.getElementById('link-name-input').value='';document.getElementById('link-url-input').value='';saveLinks();renderLinks();}
+let qlinks=[];let qfolders=[];
+async function loadLinks(){qlinks=await ipcRenderer.invoke('store-get','quickLinks')||[];qfolders=await ipcRenderer.invoke('store-get','quickFolders')||[];renderLinks();}
+function addFolder(){const name=document.getElementById('folder-name-input').value.trim();if(!name)return;qfolders.push({id:Date.now(),name,open:true,links:[]});document.getElementById('folder-name-input').value='';saveLinks();renderLinks();}
+function deleteFolder(id){if(!confirm('Delete this folder and all its links?'))return;qfolders=qfolders.filter(f=>f.id!=id);saveLinks();renderLinks();}
+function toggleFolder(id){const f=qfolders.find(f=>f.id==id);if(f)f.open=!f.open;saveLinks();renderLinks();}
+function addLink(){const name=document.getElementById('link-name-input').value.trim(),url=document.getElementById('link-url-input').value.trim(),fid=document.getElementById('link-folder-sel').value;if(!name||!url)return;const fu=url.startsWith('http')?url:'https://'+url;const lk={id:Date.now(),name,url:fu};if(fid){const f=qfolders.find(f=>f.id==fid);if(f)f.links.push(lk);}else{qlinks.push(lk);}document.getElementById('link-name-input').value='';document.getElementById('link-url-input').value='';saveLinks();renderLinks();}
 function openLink(url){shell.openExternal(url);}
-function deleteLink(id){qlinks=qlinks.filter(l=>l.id!=id);saveLinks();renderLinks();}
-function saveLinks(){ipcRenderer.invoke('store-set','quickLinks',qlinks);}
-function renderLinks(){const l=document.getElementById('link-list');if(!qlinks.length){l.innerHTML='<div class="es">no links yet~ 🔗</div>';return;}l.innerHTML=qlinks.map(lk=>`<div class="link-item"><img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(lk.url)}" style="width:16px;height:16px;border-radius:3px;" onerror="this.style.display='none'"/><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:700;">${esc(lk.name)}</div><div style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(lk.url)}</div></div><button class="btn bs sm" onclick="openLink('${lk.url.replace(/'/g,"\\'")}')">Open</button><button class="ib del" onclick="deleteLink(${lk.id})">×</button></div>`).join('');}
+function deleteLink(id,fid){if(fid!=null){const f=qfolders.find(f=>f.id==fid);if(f)f.links=f.links.filter(l=>l.id!=id);}else{qlinks=qlinks.filter(l=>l.id!=id);}saveLinks();renderLinks();}
+function saveLinks(){ipcRenderer.invoke('store-set','quickLinks',qlinks);ipcRenderer.invoke('store-set','quickFolders',qfolders);}
+function updateFolderSel(){const sel=document.getElementById('link-folder-sel');if(!sel)return;const cur=sel.value;sel.innerHTML='<option value="">No folder</option>'+qfolders.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');sel.value=cur;}
+function linkItemHTML(lk,fid){const fidArg=fid!=null?`,${fid}`:'';return`<div class="link-item"><img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(lk.url)}" style="width:16px;height:16px;border-radius:3px;" onerror="this.style.display='none'"/><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:700;">${esc(lk.name)}</div><div style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(lk.url)}</div></div><button class="btn bs sm" onclick="openLink('${lk.url.replace(/'/g,"\\'")}')">Open</button><button class="ib del" onclick="deleteLink(${lk.id}${fidArg})">×</button></div>`;}
+function renderLinks(){updateFolderSel();const l=document.getElementById('link-list');let html='';html+=qfolders.map(f=>`<div class="link-folder"><div class="link-folder-hd" onclick="toggleFolder(${f.id})"><i class="ti ti-folder${f.open?'-open':''}"></i><span class="lf-name">${esc(f.name)}</span><span class="lf-count">${f.links.length}</span><button class="ib del" onclick="event.stopPropagation();deleteFolder(${f.id})">×</button></div>${f.open?`<div class="link-folder-bd">${f.links.length?f.links.map(lk=>linkItemHTML(lk,f.id)).join(''):'<div class="es" style="font-size:11px;padding:6px 0;">empty folder~</div>'}</div>`:''}</div>`).join('');html+=qlinks.map(lk=>linkItemHTML(lk,null)).join('');if(!html)html='<div class="es">no links yet~ 🔗</div>';l.innerHTML=html;}
 function switchUtil(tab){document.getElementById('util-links').style.display=tab==='links'?'block':'none';document.getElementById('util-clip').style.display=tab==='clip'?'block':'none';document.getElementById('ut-links').style.borderBottom=tab==='links'?'2px solid var(--accent)':'none';document.getElementById('ut-clip').style.borderBottom=tab==='clip'?'2px solid var(--accent)':'none';}
 
+
+
 // CLIPBOARD
-let clips=[];
-async function loadClip(){clips=await ipcRenderer.invoke('store-get','clipHistory')||[];renderClip();}
+let clips=[];let clipFolders=[];
+async function loadClip(){clips=await ipcRenderer.invoke('store-get','clipHistory')||[];clipFolders=await ipcRenderer.invoke('store-get','clipFolders')||[];renderClip();}
 async function captureClip(){const text=await ipcRenderer.invoke('get-clipboard');if(!text||clips[0]===text)return;clips.unshift(text);if(clips.length>20)clips.pop();ipcRenderer.invoke('store-set','clipHistory',clips);renderClip();}
 async function copyClipItem(text){await ipcRenderer.invoke('set-clipboard',text);showBub('Copied! 📋');}
 function clearClip(){clips=[];ipcRenderer.invoke('store-set','clipHistory',clips);renderClip();}
-function renderClip(){const l=document.getElementById('clip-list');if(!clips.length){l.innerHTML='<div class="es">no clipboard history~ 📋<br><span style="font-size:10px;">Click Capture to save</span></div>';return;}l.innerHTML=clips.map((text,i)=>`<div class="clip-item" onclick="copyClipItem(${JSON.stringify(text)})"><span class="clip-text">${esc(text)}</span><button class="ib del" onclick="event.stopPropagation();clips.splice(${i},1);ipcRenderer.invoke('store-set','clipHistory',clips);renderClip()">×</button></div>`).join('');}
+function addClipFolder(){const name=document.getElementById('clip-folder-name-input').value.trim();if(!name)return;clipFolders.push({id:Date.now(),name,open:true,clips:[]});document.getElementById('clip-folder-name-input').value='';saveClipFolders();renderClip();}
+function deleteClipFolder(id){if(!confirm('Delete this folder and all its clips?'))return;clipFolders=clipFolders.filter(f=>f.id!=id);saveClipFolders();renderClip();}
+function toggleClipFolder(id){const f=clipFolders.find(f=>f.id==id);if(f)f.open=!f.open;saveClipFolders();renderClip();}
+function addClipItem(){const text=document.getElementById('clip-text-input').value.trim(),fid=document.getElementById('clip-folder-sel').value;if(!text||!fid)return;const f=clipFolders.find(f=>f.id==fid);if(!f)return;f.clips.push({id:Date.now(),text});document.getElementById('clip-text-input').value='';saveClipFolders();renderClip();}
+function deleteClipItem(id,fid){const f=clipFolders.find(f=>f.id==fid);if(f)f.clips=f.clips.filter(c=>c.id!=id);saveClipFolders();renderClip();}
+function saveHistoryToFolder(text,idx,fid){const f=clipFolders.find(f=>f.id==fid);if(!f)return;f.clips.push({id:Date.now(),text});clips.splice(idx,1);ipcRenderer.invoke('store-set','clipHistory',clips);saveClipFolders();renderClip();}
+function saveClipFolders(){ipcRenderer.invoke('store-set','clipFolders',clipFolders);}
+function updateClipFolderSel(){const sel=document.getElementById('clip-folder-sel');if(!sel)return;const cur=sel.value;sel.innerHTML='<option value="">Select folder...</option>'+clipFolders.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');sel.value=cur;}
+function renderClip(){updateClipFolderSel();const fl=document.getElementById('clip-folder-list');if(fl){fl.innerHTML=clipFolders.map(f=>`<div class="link-folder"><div class="link-folder-hd" onclick="toggleClipFolder(${f.id})"><i class="ti ti-folder${f.open?'-open':''}"></i><span class="lf-name">${esc(f.name)}</span><span class="lf-count">${f.clips.length}</span><button class="ib del" onclick="event.stopPropagation();deleteClipFolder(${f.id})">×</button></div>${f.open?`<div class="link-folder-bd">${f.clips.length?f.clips.map(c=>`<div class="clip-item" onclick="copyClipItem(${JSON.stringify(c.text)})"><span class="clip-text">${esc(c.text)}</span><button class="ib del" onclick="event.stopPropagation();deleteClipItem(${c.id},${f.id})">×</button></div>`).join(''):'<div class="es" style="font-size:11px;padding:6px 0;">empty folder~</div>'}</div>`:''}</div>`).join('');}
+const l=document.getElementById('clip-list');if(!clips.length){l.innerHTML='<div class="es">no clipboard history~ 📋<br><span style="font-size:10px;">Click Capture to save</span></div>';return;}l.innerHTML=clips.map((text,i)=>`<div class="clip-item"><span class="clip-text" onclick="copyClipItem(${JSON.stringify(text)})">${esc(text)}</span>${clipFolders.length?`<select class="clip-save-sel" id="csave-${i}" style="font-size:10px;padding:2px 4px;border-radius:6px;border:1.5px solid var(--border);background:var(--card);color:var(--text);max-width:80px;"><option value="">📁</option>${clipFolders.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('')}</select><button class="btn bs sm" style="padding:2px 6px;font-size:10px;" onclick="const s=document.getElementById('csave-${i}');if(s.value)saveHistoryToFolder(${JSON.stringify(text)},${i},s.value)">→</button>`:''}<button class="ib del" onclick="event.stopPropagation();clips.splice(${i},1);ipcRenderer.invoke('store-set','clipHistory',clips);renderClip()">×</button></div>`).join('');}
+
 
 // STICKY NOTES
 let stickies=[];const sColors=['#fffde7','#fce4ec','#e8f5e9','#e3f2fd','#f3e5f5','#fff3e0'];
