@@ -26,6 +26,10 @@ body{font-family:'Nunito',sans-serif;font-size:var(--font-size);background:trans
 .nav-item{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;transition:all 0.15s;position:relative;border:none;background:none;}
 .nav-item:hover{background:rgba(176,136,208,0.15);}
 .nav-item.active{background:var(--accent);box-shadow:0 2px 8px rgba(176,136,208,0.4);}
+.ni{width:18px;height:18px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke 0.15s;pointer-events:none;}
+.nav-item:hover .ni{stroke:var(--accent);}
+.nav-item.active .ni{stroke:#fff;}
+.sm-ni{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none;flex-shrink:0;}
 .nav-item .tt{position:fixed;left:60px;background:#333;color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity 0.15s;z-index:9999;}
 .nav-item:hover .tt{opacity:1;}
 .nav-div{width:32px;height:1px;background:var(--border);margin:4px 0;flex-shrink:0;}
@@ -164,23 +168,23 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
   </div>
   <div id="main-layout">
     <div id="sidebar">
-      <button class="nav-item active" data-panel="home" onclick="nav('home',this)">🏠<span class="tt">Home</span></button>
-      <button class="nav-item" data-panel="pet" onclick="nav('pet',this)">🐾<span class="tt">Pet</span></button>
+      <button class="nav-item active" data-panel="home" onclick="nav('home',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg><span class="tt">Home</span></button>
+      <button class="nav-item" data-panel="pet" onclick="nav('pet',this)"><svg class="ni" viewBox="0 0 24 24"><circle cx="8" cy="7" r="2"/><circle cx="16" cy="7" r="2"/><circle cx="5" cy="13" r="1.5"/><circle cx="19" cy="13" r="1.5"/><ellipse cx="12" cy="17" rx="5" ry="4"/></svg><span class="tt">Pet</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="timer" onclick="nav('timer',this)">🍅<span class="tt">Timer</span></button>
-      <button class="nav-item" data-panel="tasks" onclick="nav('tasks',this)">✅<span class="tt">Tasks</span></button>
-      <button class="nav-item" data-panel="productivity" onclick="nav('productivity',this)">📋<span class="tt">Productivity</span></button>
-      <button class="nav-item" data-panel="notebook" onclick="nav('notebook',this)">📓<span class="tt">Notebook</span></button>
+      <button class="nav-item" data-panel="timer" onclick="nav('timer',this)"><svg class="ni" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="tt">Timer</span></button>
+      <button class="nav-item" data-panel="tasks" onclick="nav('tasks',this)"><svg class="ni" viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg><span class="tt">Tasks</span></button>
+      <button class="nav-item" data-panel="productivity" onclick="nav('productivity',this)"><svg class="ni" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span class="tt">Productivity</span></button>
+      <button class="nav-item" data-panel="notebook" onclick="nav('notebook',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg><span class="tt">Notebook</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="reminders" onclick="nav('reminders',this)">🔔<span class="tt">Reminders</span></button>
-      <button class="nav-item" data-panel="calendar" onclick="nav('calendar',this)">📅<span class="tt">Calendar</span></button>
+      <button class="nav-item" data-panel="reminders" onclick="nav('reminders',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg><span class="tt">Reminders</span></button>
+      <button class="nav-item" data-panel="calendar" onclick="nav('calendar',this)"><svg class="ni" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg><span class="tt">Calendar</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="utility" onclick="nav('utility',this)">🔧<span class="tt">Utility</span></button>
-      <button class="nav-item" data-panel="music" onclick="nav('music',this)">🎵<span class="tt">Music</span></button>
-      <button class="nav-item" data-panel="stickies" onclick="nav('stickies',this)">🗒️<span class="tt">Sticky Notes</span></button>
+      <button class="nav-item" data-panel="utility" onclick="nav('utility',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg><span class="tt">Utility</span></button>
+      <button class="nav-item" data-panel="music" onclick="nav('music',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg><span class="tt">Music</span></button>
+      <button class="nav-item" data-panel="stickies" onclick="nav('stickies',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg><span class="tt">Sticky Notes</span></button>
       <div class="nav-div"></div>
-      <button class="nav-item" data-panel="appearance" onclick="nav('appearance',this)">🎨<span class="tt">Appearance</span></button>
-      <button class="nav-item" data-panel="tags" onclick="nav('tags',this)">🏷️<span class="tt">Tags</span></button>
+      <button class="nav-item" data-panel="appearance" onclick="nav('appearance',this)"><svg class="ni" viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><span class="tt">Appearance</span></button>
+      <button class="nav-item" data-panel="tags" onclick="nav('tags',this)"><svg class="ni" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg><span class="tt">Tags</span></button>
     </div>
     <div id="content-area">
       <!-- PERSISTENT PET BAR -->
@@ -367,7 +371,7 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
           <div class="card" style="margin-bottom:8px;">
             <div class="row" style="margin-bottom:6px;">
               <input type="text" id="folder-name-input" placeholder="New folder name..." maxlength="30" style="flex:1;" onkeydown="if(event.key==='Enter')addFolder()"/>
-              <button class="btn bp sm" onclick="addFolder()"><i class="ti ti-folder-plus"></i></button>
+              <button class="btn bp sm" onclick="addFolder()"><svg class="sm-ni" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></button>
             </div>
             <input type="text" id="link-name-input" placeholder="Link name..." maxlength="40" style="margin-bottom:6px;"/>
             <div class="row" style="margin-bottom:6px;">
@@ -382,7 +386,7 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
           <div class="card" style="margin-bottom:8px;">
             <div class="row" style="margin-bottom:6px;">
               <input type="text" id="clip-folder-name-input" placeholder="New folder name..." maxlength="30" style="flex:1;" onkeydown="if(event.key==='Enter')addClipFolder()"/>
-              <button class="btn bp sm" onclick="addClipFolder()"><i class="ti ti-folder-plus"></i></button>
+              <button class="btn bp sm" onclick="addClipFolder()"><svg class="sm-ni" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><line x1="12" y1="11" x2="12" y2="17"/><line x1="9" y1="14" x2="15" y2="14"/></svg></button>
             </div>
             <textarea id="clip-text-input" placeholder="Paste or type text to save to a folder..." rows="2" style="resize:none;width:100%;margin-bottom:6px;border:1.5px solid var(--border);border-radius:8px;padding:7px 10px;font-family:'Nunito',sans-serif;font-size:var(--font-size);font-weight:600;color:var(--text);background:var(--card);outline:none;"></textarea>
             <div class="row">
@@ -748,7 +752,7 @@ function deleteLink(id,fid){if(fid!=null){const f=qfolders.find(f=>f.id==fid);if
 function saveLinks(){ipcRenderer.invoke('store-set','quickLinks',qlinks);ipcRenderer.invoke('store-set','quickFolders',qfolders);}
 function updateFolderSel(){const sel=document.getElementById('link-folder-sel');if(!sel)return;const cur=sel.value;sel.innerHTML='<option value="">No folder</option>'+qfolders.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');sel.value=cur;}
 function linkItemHTML(lk,fid){const fidArg=fid!=null?`,${fid}`:'';return`<div class="link-item"><img src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(lk.url)}" style="width:16px;height:16px;border-radius:3px;" onerror="this.style.display='none'"/><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:700;">${esc(lk.name)}</div><div style="font-size:10px;color:var(--muted);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${esc(lk.url)}</div></div><button class="btn bs sm" onclick="openLink('${lk.url.replace(/'/g,"\\'")}')">Open</button><button class="ib del" onclick="deleteLink(${lk.id}${fidArg})">×</button></div>`;}
-function renderLinks(){updateFolderSel();const l=document.getElementById('link-list');let html='';html+=qfolders.map(f=>`<div class="link-folder"><div class="link-folder-hd" onclick="toggleFolder(${f.id})"><i class="ti ti-folder${f.open?'-open':''}"></i><span class="lf-name">${esc(f.name)}</span><span class="lf-count">${f.links.length}</span><button class="ib del" onclick="event.stopPropagation();deleteFolder(${f.id})">×</button></div>${f.open?`<div class="link-folder-bd">${f.links.length?f.links.map(lk=>linkItemHTML(lk,f.id)).join(''):'<div class="es" style="font-size:11px;padding:6px 0;">empty folder~</div>'}</div>`:''}</div>`).join('');html+=qlinks.map(lk=>linkItemHTML(lk,null)).join('');if(!html)html='<div class="es">no links yet~ 🔗</div>';l.innerHTML=html;}
+function renderLinks(){updateFolderSel();const l=document.getElementById('link-list');let html='';html+=qfolders.map(f=>`<div class="link-folder"><div class="link-folder-hd" onclick="toggleFolder(${f.id})"><i c${f.open?`<svg class=\"sm-ni\" viewBox=\"0 0 24 24\"><path d=\"M5 19a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l2-3h4l2 3h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5z\"/><polyline points=\"9 14 11 16 15 12\"/></svg>`:`<svg class=\"sm-ni\" viewBox=\"0 0 24 24\"><path d=\"M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z\"/></svg>`}<span class="lf-name">${esc(f.name)}</span><span class="lf-count">${f.links.length}</span><button class="ib del" onclick="event.stopPropagation();deleteFolder(${f.id})">×</button></div>${f.open?`<div class="link-folder-bd">${f.links.length?f.links.map(lk=>linkItemHTML(lk,f.id)).join(''):'<div class="es" style="font-size:11px;padding:6px 0;">empty folder~</div>'}</div>`:''}</div>`).join('');html+=qlinks.map(lk=>linkItemHTML(lk,null)).join('');if(!html)html='<div class="es">no links yet~ 🔗</div>';l.innerHTML=html;}
 function switchUtil(tab){document.getElementById('util-links').style.display=tab==='links'?'block':'none';document.getElementById('util-clip').style.display=tab==='clip'?'block':'none';document.getElementById('ut-links').style.borderBottom=tab==='links'?'2px solid var(--accent)':'none';document.getElementById('ut-clip').style.borderBottom=tab==='clip'?'2px solid var(--accent)':'none';}
 
 
@@ -767,7 +771,7 @@ function deleteClipItem(id,fid){const f=clipFolders.find(f=>f.id==fid);if(f)f.cl
 function saveHistoryToFolder(text,idx,fid){const f=clipFolders.find(f=>f.id==fid);if(!f)return;f.clips.push({id:Date.now(),text});clips.splice(idx,1);ipcRenderer.invoke('store-set','clipHistory',clips);saveClipFolders();renderClip();}
 function saveClipFolders(){ipcRenderer.invoke('store-set','clipFolders',clipFolders);}
 function updateClipFolderSel(){const sel=document.getElementById('clip-folder-sel');if(!sel)return;const cur=sel.value;sel.innerHTML='<option value="">Select folder...</option>'+clipFolders.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('');sel.value=cur;}
-function renderClip(){updateClipFolderSel();const fl=document.getElementById('clip-folder-list');if(fl){fl.innerHTML=clipFolders.map(f=>`<div class="link-folder"><div class="link-folder-hd" onclick="toggleClipFolder(${f.id})"><i class="ti ti-folder${f.open?'-open':''}"></i><span class="lf-name">${esc(f.name)}</span><span class="lf-count">${f.clips.length}</span><button class="ib del" onclick="event.stopPropagation();deleteClipFolder(${f.id})">×</button></div>${f.open?`<div class="link-folder-bd">${f.clips.length?f.clips.map(c=>`<div class="clip-item" onclick="copyClipItem(${JSON.stringify(c.text)})"><span class="clip-text">${esc(c.text)}</span><button class="ib del" onclick="event.stopPropagation();deleteClipItem(${c.id},${f.id})">×</button></div>`).join(''):'<div class="es" style="font-size:11px;padding:6px 0;">empty folder~</div>'}</div>`:''}</div>`).join('');}
+function renderClip(){updateClipFolderSel();const fl=document.getElementById('clip-folder-list');if(fl){fl.innerHTML=clipFolders.map(f=>`<div class="link-folder"><div class="link-folder-hd" onclick="toggleClipFolder(${f.id})"><i c${f.open?`<svg class=\"sm-ni\" viewBox=\"0 0 24 24\"><path d=\"M5 19a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h3l2-3h4l2 3h3a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5z\"/><polyline points=\"9 14 11 16 15 12\"/></svg>`:`<svg class=\"sm-ni\" viewBox=\"0 0 24 24\"><path d=\"M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z\"/></svg>`}<span class="lf-name">${esc(f.name)}</span><span class="lf-count">${f.clips.length}</span><button class="ib del" onclick="event.stopPropagation();deleteClipFolder(${f.id})">×</button></div>${f.open?`<div class="link-folder-bd">${f.clips.length?f.clips.map(c=>`<div class="clip-item" onclick="copyClipItem(${JSON.stringify(c.text)})"><span class="clip-text">${esc(c.text)}</span><button class="ib del" onclick="event.stopPropagation();deleteClipItem(${c.id},${f.id})">×</button></div>`).join(''):'<div class="es" style="font-size:11px;padding:6px 0;">empty folder~</div>'}</div>`:''}</div>`).join('');}
 const l=document.getElementById('clip-list');if(!clips.length){l.innerHTML='<div class="es">no clipboard history~ 📋<br><span style="font-size:10px;">Click Capture to save</span></div>';return;}l.innerHTML=clips.map((text,i)=>`<div class="clip-item"><span class="clip-text" onclick="copyClipItem(${JSON.stringify(text)})">${esc(text)}</span>${clipFolders.length?`<select class="clip-save-sel" id="csave-${i}" style="font-size:10px;padding:2px 4px;border-radius:6px;border:1.5px solid var(--border);background:var(--card);color:var(--text);max-width:80px;"><option value="">📁</option>${clipFolders.map(f=>`<option value="${f.id}">${esc(f.name)}</option>`).join('')}</select><button class="btn bs sm" style="padding:2px 6px;font-size:10px;" onclick="const s=document.getElementById('csave-${i}');if(s.value)saveHistoryToFolder(${JSON.stringify(text)},${i},s.value)">→</button>`:''}<button class="ib del" onclick="event.stopPropagation();clips.splice(${i},1);ipcRenderer.invoke('store-set','clipHistory',clips);renderClip()">×</button></div>`).join('');}
 
 
