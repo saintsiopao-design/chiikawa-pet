@@ -502,7 +502,7 @@ input[type="datetime-local"]{color-scheme:light;}input[type="range"]{padding:0;}
 </div>
 <audio id="bg-audio" loop></audio>
 <script>
-const {ipcRenderer}=require('electron');const {shell}=require('electron');const pt=require('path');
+const {ipcRenderer}=require('electron');const {shell}=require('electron');const {clipboard}=require('electron');const pt=require('path');
 
 // NAV
 // Set window button icons using proper path
@@ -762,8 +762,9 @@ function switchUtil(tab){document.getElementById('util-links').style.display=tab
 // CLIPBOARD
 let clips=[];let clipFolders=[];
 async function loadClip(){clips=await ipcRenderer.invoke('store-get','clipHistory')||[];clipFolders=await ipcRenderer.invoke('store-get','clipFolders')||[];renderClip();}
-async function captureClip(){const text=await ipcRenderer.invoke('get-clipboard');if(!text||clips[0]===text)return;clips.unshift(text);if(clips.length>20)clips.pop();ipcRenderer.invoke('store-set','clipHistory',clips);renderClip();}
-async function copyClipItem(text){await ipcRenderer.invoke('set-clipboard',text);showBub('Copied!');}
+async function captureClip(){const text=clipboard.readText();if(!text||clips[0]===text)return;clips.unshift(text);if(clips.length>20)clips.pop();ipcRenderer.invoke('store-set','clipHistory',clips);renderClip();}
+function copyClipItem(text){clipboard.writeText(text);showBub('Copied!');}
+function copyClipByIdx(i){if(clips[i]!=null)copyClipItem(clips[i]);}
 function copyClipByIdx(i){if(clips[i]!=null)copyClipItem(clips[i]);}
 function copyFolderClip(fid,cid){const f=clipFolders.find(f=>f.id==fid);const c=f&&f.clips.find(c=>c.id==cid);if(c)copyClipItem(c.text);}
 function clearClip(){clips=[];ipcRenderer.invoke('store-set','clipHistory',clips);renderClip();}
